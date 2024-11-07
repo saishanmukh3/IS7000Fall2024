@@ -14,6 +14,8 @@ function App() {
     <div className="App bg-rose-400	  w-full h-screen" >
       <Navbar />
       <Routes>
+
+        
         <Route path='/' element={<Home />} />
         <Route path='/markets' element={<MarketOverview />} />
         <Route path='/subscription' element={<Subscription />} />
