@@ -67,9 +67,66 @@ const SubscriptionForm = () => {
   if (loading) return <div>Loading...</div>;
 
   return (
+    <div className="max-w-md mx-auto p-5 border border-gray-300 rounded-lg shadow-lg">
+      <h2 className="text-xl font-semibold mb-4">
+        {id ? 'Update Subscription' : 'Create Subscription'}
+      </h2>
 
-    <div>HI</div>
-    
+      {/* Error message */}
+      {error && <p className="text-red-500 text-sm">{error}</p>}
+
+      {/* Form */}
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Subscription Name */}
+        <div>
+          <label className="block text-sm font-medium">Name</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-md"
+            required
+          />
+        </div>
+
+        {/* Price */}
+        <div>
+          <label className="block text-sm font-medium">Price (USD)</label>
+          <input
+            type="number"
+            name="price"
+            value={formData.price}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-md"
+            required
+          />
+        </div>
+
+        {/* Status */}
+        <div>
+          <label className="block text-sm font-medium">Status</label>
+          <select
+            name="status"
+            value={formData.status}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-300 rounded-md"
+            required
+          >
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="w-full p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+        >
+          {id ? 'Update' : 'Create'} Subscription
+        </button>
+      </form>
+    </div>
   );
 };
 
