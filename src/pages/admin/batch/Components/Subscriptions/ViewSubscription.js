@@ -21,7 +21,7 @@ const ViewSubscription = ({ updatingData, close }) => {
     <div className="flex flex-col gap-3">
       {updatingData && Object?.keys(updatingData)?.length > 0 && (
         <>
-          <div className=" text-xl font-bold bg-themeColor text-white p-3"> Subscription details</div>
+          <div className=" text-xl font-bold bg-themeColor text-white p-3"> View Subscription details</div>
           <div className="p-2">
             <div className="flex flex-col">
               <div className="font-bold text-lg">Subscription Details</div>
@@ -51,7 +51,7 @@ const ViewSubscription = ({ updatingData, close }) => {
             )}
             {updatingData?.service && Object?.keys(updatingData?.service)?.length > 0 && (
               <div className="flex flex-col">
-                <div className="font-bold text-lg">Service Details</div>
+                <div className="font-bold text-lg"> Service Details</div>
                 <div className="flex">
                   {serviceKeys?.map((e, i) => (
                     <div className="flex">
