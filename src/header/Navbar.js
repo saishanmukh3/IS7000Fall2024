@@ -9,7 +9,6 @@ function Navbar() {
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
   const [token, setToken] = useState(null);
-
   return (
     <nav className='flex justify-between p-5 items-center border-b bg-[#e7e7e7d1] nav'>
       <h1 className='text-4xl logo'>Market Insyte</h1>
@@ -25,12 +24,10 @@ function Navbar() {
         <Link to='/signup'><li>SignUp</li></Link>
         <Link to='/batch'><li>Batch</li></Link>
       </ul>
-      
       {/* Hamburger or Close Icon */}
       <div className='md:hidden z-10' onClick={handleClick}>
         {nav ? <FaTimes size={25} color='white' /> : <RxHamburgerMenu size={25} />}
       </div>
-      
       {/* Mobile Menu */}
       <ul
         className={`${
@@ -54,5 +51,4 @@ function Navbar() {
     </nav>
   );
 }
-
 export default Navbar;

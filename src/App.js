@@ -18,12 +18,9 @@ import Batch from './pages/admin/batch/Batch';
 import SubscriptionRC from "./pages/admin/batch/Components/Subscriptions/SubscriptionRC";
 import Logs from "./pages/admin/Logs";
 import {setAuthToken} from "./pages/user/AuthToken";
-
-
 function App() {
-  
   return (
-    <div className="App bg-rose-400	w-full h-screen" >
+    <div className="App bg-rose-400 w-full h-screen" >
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
@@ -38,12 +35,18 @@ function App() {
         <Route path='/signup' element={<SignUp />} />
         <Route path="/batch" element={<Batch />} />
           <Route path="/log" element={<Logs />} />
-
       </Routes>
       <Footer />
-
     </div>
   );
 }
-
 export default App;
+
+
+
+
+
+
+
+
+
