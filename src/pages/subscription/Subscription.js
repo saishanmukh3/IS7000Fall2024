@@ -1,76 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom'; // For accessing URL params and navigation
-import axios from 'axios';
+import EditSubscription from './EditSubscription';
 
-const SubscriptionForm = () => {
-  // State to hold the form data, loading state, and error handling
-  const [formData, setFormData] = useState({
-    name: '',
-    price: '',
-    status: 'active',
-  });
-  const [loading, setLoading] = useState(true); // To manage loading state
-  const [error, setError] = useState(null); // To manage error state
-  const { id } = useParams(); // Get the subscription ID from the URL for editing (if exists)
-  const navigate = useNavigate(); // For navigation after the form submission
+import React, { useState } from 'react';
+import TopFiveSubscriptions from './TopFiveSubscriptions';
+import SubscriptionPlans from './Subscriptionform';
+import DeleteSubscription from './DeleteSubscription';
+import TopServices from './TopServices';
+import TopSubscriptions from './TopSubscriptions';
+import SubscriptionList from './SubscriptionList';
+import EditService from './EditService';
 
-  // Fetch subscription data if updating (if id exists in URL)
-  useEffect(() => {
-    if (id) {
-      setLoading(true); // Start loading when fetching data
-      axios
-        .get(`https://your-api-url.com/api/subscriptions/${id}`) // Get request to fetch subscription data by ID
-        .then((response) => {
-          setFormData(response.data); // Set the fetched data into formData state
-          setLoading(false); // Stop loading after fetching data
-        })
-        .catch((err) => {
-          setError('Error fetching subscription details'); // Set error if request fails
-          setLoading(false); // Stop loading
-        });
-    } else {
-      setLoading(false); // If no id in URL, no need to fetch data, just show the form
-    }
-  }, [id]);
-
-  // Handle form input changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    // Determine whether we are creating or updating a subscription
-    const request = id
-      ? axios.put(`https://your-api-url.com/api/subscriptions/${id}`, formData) // Update request
-      : axios.post('https://your-api-url.com/api/subscriptions', formData); // Create request
-
-    request
-      .then(() => {
-        setLoading(false);
-        navigate('/admin/subscriptions'); // Redirect to subscription list after successful submission
-      })
-      .catch((err) => {
-        setLoading(false);
-        setError('Error saving subscription'); // Display error if the submission fails
-      });
-  };
-
-  // Return loading message or the form
-  if (loading) return <div>Loading...</div>;
+function Subscription() {
+  const [selectedPlan, setSelectedPlan] = useState(null);
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
 
   return (
+    <div className="bg-gray-100 min-h-screen flex flex-col items-center p-8">
+      <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-lg">
+        <TopServices />
+      </div>
+      <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-lg">
+        <TopSubscriptions />
+      </div>
+      <h1 className="text-4xl font-bold mb-8 text-center text-black">Manage Subscriptions</h1>
+      <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-lg">
+        <DeleteSubscription />
+        <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-lg">
+          <EditSubscription />
+        </div>
 
-    <div>HI</div>
-    
+        <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-lg">
+          <TopFiveSubscriptions />
+        </div>
+        <div className="flex justify-center items-start p-6 bg-gray-100 min-h-screen">
+          <SubscriptionPlans />
+        </div>
+        <div className="flex justify-center items-start p-6 bg-gray-100 min-h-screen">
+          <SubscriptionList />
+          <EditService />
+        </div>
+      </div>
+    </div>
   );
-};
-
-export default SubscriptionForm;
+}
+export default Subscription;
